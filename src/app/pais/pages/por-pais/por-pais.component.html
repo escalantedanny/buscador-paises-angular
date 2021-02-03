@@ -2,17 +2,10 @@
 <hr>
 <div class="row">
     <div class="col">
-        <form 
-            (ngSubmit)="buscar()" 
-            autocomplete="off">
-            <input 
-                type="text" 
-                name="termino" 
-                id="termino"
-                placeholder="Buscar por País"
-                [(ngModel)]="termino"
-            >
-        </form>
+        <app-busqueda
+        (onEnter)="buscar( $event )"
+        >
+        </app-busqueda>
     </div>
 </div>
 <hr>
@@ -20,28 +13,8 @@
     no se encontro nada con el Termino {{ termino }}
 </div>
 
-
 <div class="row" *ngIf="respuesta.length > 0">
     <div class="col">
-        <table class="table table-hover" >
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Bandera</th>
-                    <th>Nombre</th>
-                    <th>Poblacion</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let pais of respuesta; let i = index">
-                    <td>{{ i + 1 }}</td>
-                    <td><img [src]="pais.flag" class="small-flag" ></td>
-                    <td>{{ pais.name }}</td>
-                    <td>{{ pais.population | number }}</td>
-                    <td><a [routerLink]="[ '/pais', pais.alpha2Code ]">Ver...</a></td>
-                </tr>
-            </tbody>
-        </table>
+        <app-listado [paises]="respuesta"></app-listado>
     </div>
 </div>

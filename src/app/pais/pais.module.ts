@@ -9,6 +9,8 @@ import { PorMonedaComponent } from './pages/por-moneda/por-moneda.component';
 import { PorIdiomaComponent } from './pages/por-idioma/por-idioma.component';
 import { VerPaisComponent } from './pages/ver-pais/ver-pais.component';
 import { RouterModule } from '@angular/router';
+import { ListadoComponent } from './components/listado/listado.component';
+import { BusquedaComponent } from './components/busqueda/busqueda.component';
 
 
 
@@ -19,7 +21,9 @@ import { RouterModule } from '@angular/router';
     PorRegionComponent, 
     PorMonedaComponent, 
     PorIdiomaComponent, 
-    VerPaisComponent
+    VerPaisComponent, 
+    ListadoComponent, 
+    BusquedaComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +36,9 @@ import { RouterModule } from '@angular/router';
     PorRegionComponent, 
     PorMonedaComponent, 
     PorIdiomaComponent, 
-    VerPaisComponent
+    VerPaisComponent,
+    ListadoComponent, 
+    BusquedaComponent
   ]
 })
 export class PaisModule { }
