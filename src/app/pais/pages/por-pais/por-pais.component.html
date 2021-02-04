@@ -4,6 +4,8 @@
     <div class="col">
         <app-busqueda
         (onEnter)="buscar( $event )"
+        (onDebounce)="sugerencias( $event )"
+        [placeholder]="placeholder"
         >
         </app-busqueda>
     </div>

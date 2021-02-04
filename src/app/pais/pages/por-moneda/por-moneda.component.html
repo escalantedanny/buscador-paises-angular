@@ -1,1 +1,13 @@
-<p>por-moneda works!</p>
+<p>Por Moneda</p>
+<hr>
+<div class="row">
+    <div class="col">
+        <app-busqueda
+        (onEnter)="buscar( $event )"
+        (onDebounce)="sugerencias( $event )"
+        [placeholder]="placeholder"
+        >
+        </app-busqueda>
+    </div>
+</div>
+<hr>

@@ -1,1 +1,13 @@
-<p>por-idioma works!</p>
+<p>Por Lengua Hablada y Escrita</p>
+<hr>
+<div class="row">
+    <div class="col">
+        <app-busqueda
+        (onEnter)="buscar( $event )"
+        (onDebounce)="sugerencias( $event )"
+        [placeholder]="placeholder"
+        >
+        </app-busqueda>
+    </div>
+</div>
+<hr>

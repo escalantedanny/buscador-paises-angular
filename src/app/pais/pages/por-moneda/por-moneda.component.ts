@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Currency } from '../../interfaces/pais.interface';
+import { PaisService } from '../../services/pais.service';
 
 @Component({
   selector: 'app-por-moneda',
@@ -6,11 +8,30 @@ import { Component, OnInit } from '@angular/core';
   styles: [
   ]
 })
-export class PorMonedaComponent implements OnInit {
+export class PorMonedaComponent  {
 
-  constructor() { }
+  termino:string = '';
+  placeholder:string = 'Buscar por Moneda';
+  respuesta:Currency[] = [];
+  hayError:boolean = false;
 
-  ngOnInit(): void {
+  constructor( private paisService:PaisService ) { }
+
+  buscar( termino: string ) {
+    //if(this.termino.trim().length === 0){ return; }
+    this.hayError = false;
+    this.termino = termino;
+    this.paisService.buscarMoneda( this.termino ).subscribe( monedas => {
+      this.respuesta = monedas;
+    }, (err) => {
+      this.hayError = true;
+      this.respuesta = [];
+    });
+    
+  }
+
+  sugerencias( event:string){
+    this.hayError = false;
   }
 
 }

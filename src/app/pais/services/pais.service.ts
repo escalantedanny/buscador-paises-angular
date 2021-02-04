@@ -8,7 +8,7 @@ import { Country, Currency, Language, RegionalBloc } from '../interfaces/pais.in
 })
 export class PaisService {
 
-  urlBase:string = 'https://restcountries.eu/rest/v2';
+  urlBase:string = 'https://restcountries.eu/rest/v2'
   constructor( private http:HttpClient){ }
 
   buscarPais( termino:string):Observable<Country[]> {
@@ -29,6 +29,10 @@ export class PaisService {
 
   buscarMoneda( termino:string):Observable<Currency[]> {
     return this.http.get<Currency[]>(`${this.urlBase}/currency/${termino}`);
+  }
+
+  detallePais( termino:string ):Observable<Country[]> {
+    return this.http.get<Country[]>(`${this.urlBase}/alpha/${termino}`);
   }
 
 }

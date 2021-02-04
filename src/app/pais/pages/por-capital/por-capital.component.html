@@ -1,1 +1,22 @@
-<p>por-capital works!</p>
+<p>Por Capital</p>
+<hr>
+<div class="row">
+    <div class="col">
+        <app-busqueda
+        (onEnter)="buscar( $event )"
+        (onDebounce)="sugerencias( $event )"
+        [placeholder]="placeholder"
+        >
+        </app-busqueda>
+    </div>
+</div>
+<hr>
+<div class="alert alert-danger" *ngIf="hayError">
+    no se encontro nada con el Termino {{ termino }}
+</div>
+
+<div class="row" *ngIf="respuesta.length > 0">
+    <div class="col">
+        <app-listado [paises]="respuesta"></app-listado>
+    </div>
+</div>

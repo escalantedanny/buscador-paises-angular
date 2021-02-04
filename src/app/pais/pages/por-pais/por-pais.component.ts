@@ -4,13 +4,12 @@ import { Country } from '../../interfaces/pais.interface';
 
 @Component({
   selector: 'app-por-pais',
-  templateUrl: './por-pais.component.html',
-  styles: [
-  ]
+  templateUrl: './por-pais.component.html'
 })
 export class PorPaisComponent  {
 
   termino:string = '';
+  placeholder:string = 'Buscar por País';
   respuesta:Country[] = [];
   hayError:boolean = false;
 
@@ -27,6 +26,10 @@ export class PorPaisComponent  {
       this.respuesta = [];
     });
     
+  }
+
+  sugerencias( event:string){
+    this.hayError = false;
   }
 
 }
