@@ -9,6 +9,7 @@ import { Country, Currency, Language, RegionalBloc } from '../interfaces/pais.in
 export class PaisService {
 
   urlBase:string = 'https://restcountries.eu/rest/v2'
+
   constructor( private http:HttpClient){ }
 
   buscarPais( termino:string):Observable<Country[]> {
@@ -19,12 +20,12 @@ export class PaisService {
     return this.http.get(`${this.urlBase}/capital/${termino}`);
   }
 
-  buscarRegion( termino:string):Observable<RegionalBloc[]> {
+  buscarRegion( termino:string):Observable<Country[]> {
 
     const params = new HttpParams()
       .set('fields', 'name;capital;alpha2Code;flag;population');
 
-    return this.http.get<RegionalBloc[]>(`${this.urlBase}/region/${termino}`, { params });
+    return this.http.get<Country[]>(`${this.urlBase}/region/${termino}`, { params });
   }
 
   buscarIdioma( termino:string):Observable<Country[]> {

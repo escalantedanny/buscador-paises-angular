@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RegionalBloc } from '../../interfaces/pais.interface';
+import { Country, RegionalBloc } from '../../interfaces/pais.interface';
 import { PaisService } from '../../services/pais.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class PorRegionComponent {
   regionActiva:string = '';
   termino:string = '';
   placeholder:string = 'Buscar por Región';
-  respuesta:RegionalBloc[] = [];
+  respuesta:Country[] = [];
   hayError:boolean = false;
 
   constructor( private paisService:PaisService ) { }
