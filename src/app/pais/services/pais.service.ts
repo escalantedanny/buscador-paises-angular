@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Country, Currency, Language, RegionalBloc } from '../interfaces/pais.interface';
 
@@ -20,7 +20,11 @@ export class PaisService {
   }
 
   buscarRegion( termino:string):Observable<RegionalBloc[]> {
-    return this.http.get<RegionalBloc[]>(`${this.urlBase}/region/${termino}`);
+
+    const params = new HttpParams()
+      .set('fields', 'name;capital;alpha2Code;flag;population');
+
+    return this.http.get<RegionalBloc[]>(`${this.urlBase}/region/${termino}`, { params });
   }
 
   buscarIdioma( termino:string):Observable<Language[]> {
