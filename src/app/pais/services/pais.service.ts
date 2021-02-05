@@ -27,12 +27,12 @@ export class PaisService {
     return this.http.get<RegionalBloc[]>(`${this.urlBase}/region/${termino}`, { params });
   }
 
-  buscarIdioma( termino:string):Observable<Language[]> {
-    return this.http.get<Language[]>(`${this.urlBase}/lang/${termino}`);
+  buscarIdioma( termino:string):Observable<Country[]> {
+    return this.http.get<Country[]>(`${this.urlBase}/lang/${termino}`);
   }
 
-  buscarMoneda( termino:string):Observable<Currency[]> {
-    return this.http.get<Currency[]>(`${this.urlBase}/currency/${termino}`);
+  buscarMoneda( termino:string):Observable<Country[]> {
+    return this.http.get<Country[]>(`${this.urlBase}/currency/${termino}`);
   }
 
   detallePais( termino:string ):Observable<Country[]> {

@@ -10,4 +10,32 @@
         </app-busqueda>
     </div>
 </div>
-<hr>
+<ul class="list-group" *ngIf="mostrarSugerencias">
+    <li  *ngFor="let pais of monedasSujeridos"
+        class="list-group-item list-group-item-action"
+    >
+        <a 
+            class="nav-link"
+            [routerLink]="['/pais', pais.alpha2Code ]">
+            ( {{ pais.currencies[0].code }} ){{ pais.name }}
+        </a>
+    </li>
+    <li 
+        class="list-group-item list-group-item-action"
+        (click)="buscarSugerido( termino )"    
+    >
+        <a class="nav-link">
+            Buscar "{{ termino }}"
+        </a>
+    </li>
+</ul>
+<hr *ngIf="respuesta.length > 0">
+<div class="alert alert-danger" *ngIf="hayError">
+    no se encontro nada con el Termino {{ termino }}
+</div>
+
+<div class="row animate__animated animate__fadeIn" *ngIf="respuesta.length > 0">
+    <div class="col">
+        <app-listado [paises]="respuesta"></app-listado>
+    </div>
+</div>

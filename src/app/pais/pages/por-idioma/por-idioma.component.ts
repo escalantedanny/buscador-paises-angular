@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Language } from '../../interfaces/pais.interface';
+import { Country } from '../../interfaces/pais.interface';
 import { PaisService } from '../../services/pais.service';
 
 @Component({
@@ -12,16 +12,19 @@ export class PorIdiomaComponent  {
 
   termino:string = '';
   placeholder:string = 'Buscar por Idioma';
-  respuesta:Language[] = [];
+  respuesta:Country[] = [];
+  idiomaSujeridos:Country[] = [];
   hayError:boolean = false;
+  mostrarSugerencias:boolean = false;
 
   constructor( private paisService:PaisService ) { }
 
   buscar( termino: string ) {
     //if(this.termino.trim().length === 0){ return; }
+    this.mostrarSugerencias = false;
     this.hayError = false;
     this.termino = termino;
-    this.paisService.buscarIdioma( this.termino ).subscribe( idiomas => {
+    this.paisService.buscarPais( this.termino ).subscribe( idiomas => {
       this.respuesta = idiomas;
     }, (err) => {
       this.hayError = true;
@@ -30,8 +33,22 @@ export class PorIdiomaComponent  {
     
   }
 
-  sugerencias( event:string){
+  sugerencias( termino:string){
+    this.mostrarSugerencias = true;
     this.hayError = false;
+    this.termino = termino;
+    this.paisService.buscarIdioma( termino )
+      .subscribe( idiomas => {
+        this.idiomaSujeridos = idiomas.splice(0,5)
+      }),
+      (err) => {
+        this.mostrarSugerencias = false;
+        this.idiomaSujeridos = [];
+      };
+  }
+
+  buscarSugerido( termino: string){
+    this.buscar( termino );
   }
 
 }

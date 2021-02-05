@@ -13,12 +13,15 @@ export class PorCapitalComponent  {
   termino:string = '';
   placeholder:string = 'Buscar por Capital';
   respuesta:Country[] = [];
+  paisesSujeridos:Country[] = [];
   hayError:boolean = false;
+  mostrarSugerencias:boolean = false;
 
   constructor( private paisService:PaisService ) { }
 
   buscar( termino: string ) {
     //if(this.termino.trim().length === 0){ return; }
+    this.mostrarSugerencias = false;
     this.hayError = false;
     this.termino = termino;
     this.paisService.buscarCapital( this.termino ).subscribe( capitales => {
@@ -27,11 +30,19 @@ export class PorCapitalComponent  {
       this.hayError = true;
       this.respuesta = [];
     });
-    
   }
 
-  sugerencias( event:string){
+  sugerencias( termino:string){
+    this.mostrarSugerencias = true;
     this.hayError = false;
+    this.termino = termino;
+    this.paisService.buscarCapital( termino )
+      .subscribe( paises => this.paisesSujeridos = paises.splice(0,5)),
+      (err) => this.paisesSujeridos = [];
+  }
+
+  buscarSugerido( termino: string){
+    this.buscar( termino );
   }
 
 }
