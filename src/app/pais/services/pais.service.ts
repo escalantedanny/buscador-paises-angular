@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Country, Currency, Language, RegionalBloc } from '../interfaces/pais.interface';
 
@@ -8,7 +8,8 @@ import { Country, Currency, Language, RegionalBloc } from '../interfaces/pais.in
 })
 export class PaisService {
 
-  urlBase:string = 'https://restcountries.eu/rest/v2';
+  urlBase:string = 'https://restcountries.eu/rest/v2'
+
   constructor( private http:HttpClient){ }
 
   buscarPais( termino:string):Observable<Country[]> {
@@ -19,16 +20,24 @@ export class PaisService {
     return this.http.get(`${this.urlBase}/capital/${termino}`);
   }
 
-  buscarRegion( termino:string):Observable<RegionalBloc[]> {
-    return this.http.get<RegionalBloc[]>(`${this.urlBase}/region/${termino}`);
+  buscarRegion( termino:string):Observable<Country[]> {
+
+    const params = new HttpParams()
+      .set('fields', 'name;capital;alpha2Code;flag;population');
+
+    return this.http.get<Country[]>(`${this.urlBase}/region/${termino}`, { params });
   }
 
-  buscarIdioma( termino:string):Observable<Language[]> {
-    return this.http.get<Language[]>(`${this.urlBase}/lang/${termino}`);
+  buscarIdioma( termino:string):Observable<Country[]> {
+    return this.http.get<Country[]>(`${this.urlBase}/lang/${termino}`);
   }
 
-  buscarMoneda( termino:string):Observable<Currency[]> {
-    return this.http.get<Currency[]>(`${this.urlBase}/currency/${termino}`);
+  buscarMoneda( termino:string):Observable<Country[]> {
+    return this.http.get<Country[]>(`${this.urlBase}/currency/${termino}`);
+  }
+
+  detallePais( termino:string ):Observable<Country[]> {
+    return this.http.get<Country[]>(`${this.urlBase}/alpha/${termino}`);
   }
 
 }

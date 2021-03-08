@@ -6,7 +6,8 @@
         type="text" 
         name="termino" 
         id="termino"
-        placeholder="Buscar por País"
+        [placeholder]="placeholder"
         [(ngModel)]="termino"
+        (input)="teclaPrecionada( )"
     >
 </form>
