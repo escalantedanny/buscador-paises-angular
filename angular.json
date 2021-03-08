@@ -62,7 +62,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "countrysApp:build"
+            "browserTarget": "countrysApp:build",
+            "port": 5000
           },
           "configurations": {
             "production": {
